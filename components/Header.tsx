@@ -1,13 +1,10 @@
 "use client";
 import React, { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { PokemonProp } from "./PokemonCard";
+import { useDispatch } from "react-redux";
 import { addFilterType, addSearchTerm } from "@/redux/slices/PokemonSlice";
 
 // Header component
 const Header = () => {
-  // Redux: Get data from the store
-  const data = useSelector((data) => data) as { pokemon: PokemonProp[] };
 
   // Redux: Get the dispatch function
   const dispatch = useDispatch();

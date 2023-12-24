@@ -11,7 +11,8 @@ export const fetchPokemons = async (next?:string) => {
       
     return { pokemons:allInfo, next: data?.next };
   } catch (error) {
-    return error;
+    console.log(error)
+    // return error;
   }
 };
 
