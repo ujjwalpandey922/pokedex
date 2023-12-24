@@ -24,20 +24,22 @@ function LoadMore({
 
   // Redux state and dispatch function
   const { allPokemonData, searchTerm, filterType } = useSelector(
-    (data:any) => data.pokemon
-  ) 
+    (data: any) => data.pokemon
+  );
   // init dispatch to use actions
   const dispatch = useDispatch();
 
   // Fetch new pokemons function
   const fetchNewPokemons = useCallback(async () => {
-    const { pokemons, next } = (await fetchPokemons(page)) as {
-      pokemons: PokemonProp[];
-      next: string;
-    };
-    dispatch(addPokemon(pokemons));
-    setNewPokemons([...newPokemons, ...pokemons]);
-    setpage(next);
+    if (page) {
+      const { pokemons, next } = (await fetchPokemons(page)) as {
+        pokemons: PokemonProp[];
+        next: string;
+      };
+      dispatch(addPokemon(pokemons));
+      setNewPokemons([...newPokemons, ...pokemons]);
+      setpage(next);
+    }
   }, [newPokemons, page, dispatch]);
 
   // Effect to fetch new pokemons when the component is in view
@@ -50,7 +52,7 @@ function LoadMore({
   // Effect to initially add pokemons to the Redux store
   useEffect(() => {
     dispatch(addPokemon(pokemons));
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   // Filtering logic based on searchTerm and filterType
