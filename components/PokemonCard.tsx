@@ -2,7 +2,7 @@
 import Image from "next/image";
 
 import { motion } from "framer-motion";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import ModalComponent from "./Modal";
 
 // PokemonCard component
@@ -54,12 +54,16 @@ const variants = {
 function PokemonCard({ pokemon, index }: Prop) {
   // State to control the visibility of the modal
   const [show, setShow] = useState(false);
+
   //********how to disable scroll when modal pops up***********
+  useEffect(() => {
+    //This code is executed in the browser
 
     show
-      ? (global.document.body.style.overflow = "hidden")
-      : (global.document.body.style.overflow = "auto");
-
+      ? (window.document.body.style.overflow = "hidden")
+      : (window.document.body.style.overflow = "auto");
+  }, [show]);
+  //********how to disable scroll when modal pops up***********
 
   // Function to handle click event and show the modal
   const handleClick = () => {
@@ -76,7 +80,7 @@ function PokemonCard({ pokemon, index }: Prop) {
         animate="visible"
         transition={{
           delay: 1,
-          duration:  1,
+          duration: 1,
           ease: "easeInOut",
         }}
         className={`max-w-sm rounded relative w-full p-2 hover:rotate-3 hover:scale-105 transition-all cursor-pointer focus:scale-0 ${pokemon.types[0].type.name}`}
