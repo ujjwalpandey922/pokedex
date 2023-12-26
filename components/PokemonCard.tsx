@@ -54,6 +54,10 @@ const variants = {
 function PokemonCard({ pokemon, index }: Prop) {
   // State to control the visibility of the modal
   const [show, setShow] = useState(false);
+  //********how to disable scroll when modal pops up***********
+  show
+    ? (document.body.style.overflow = "hidden")
+    : (document.body.style.overflow = "auto");
 
   // Function to handle click event and show the modal
   const handleClick = () => {

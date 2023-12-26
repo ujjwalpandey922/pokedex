@@ -24,9 +24,9 @@ const Header = () => {
   };
 
   return (
-    <div className="flex gap-4 items-end fixed top-0 z-[1000] bg-[#0000005a] p-4">
+    <div className="flex fixed gap-4 items-end  top-0 z-[1000] bg-[#0000005a] p-4">
       {/* Background blur effect */}
-      <div className="absolute inset-0 blur-md"></div>
+      <div className="absolute top-0 left-0 h-full w-full bg-[#0000004f] blur-md">.</div>
 
       {/* Search input */}
       <div className="pt-2 relative mx-auto text-gray-600">

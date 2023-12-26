@@ -26,11 +26,10 @@ const ModalComponent = ({
       setShowModal(false);
     }
   };
-
   return (
     <div
       // Modal backdrop styling
-      className={`fixed inset-0 bg-[#0000007f] p-12 flex justify-center z-20 bg-opacity-50 duration-300 overflow-y-auto`}
+      className={`fixed inset-0 bg-[#0000007f] p-12 flex justify-center z-[2000] bg-opacity-50 duration-300 overflow-y-auto `}
       ref={outer}
       onClick={(e) => handleOuterClick(e)}
     >
