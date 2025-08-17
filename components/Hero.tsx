@@ -1,11 +1,11 @@
-import Image from "next/image";
-import Header from "./Header";
+import Image from 'next/image';
+import Header from './Header';
 
 // Hero component
 function Hero() {
   return (
     // Hero section with background image and styling
-    <header className="bg-hero bg-center bg-cover bg-no-repeat sm:p-16 py-16 px-8 flex justify-center lg:items-center max-lg:flex-col w-full sm:gap-16 gap-0">
+    <header className="bg-hero bg-center bg-cover bg-no-repeat sm:p-16 py-12 px-4 flex justify-center lg:items-center max-lg:flex-col w-full sm:gap-16 gap-0">
       {/* Header component */}
       <Header />
 

@@ -1,11 +1,10 @@
-"use client";
+'use client';
 
-import { PokemonProp } from "./PokemonCard";
-import { useRef } from "react";
-import Image from "next/image";
-import { Progress } from "./ui/progress";
+import { PokemonProp } from './PokemonCard';
+import { useRef } from 'react';
+import Image from 'next/image';
+import { Progress } from './ui/progress';
 
-// Modal component
 const ModalComponent = ({
   setShowModal,
   pokemonDetails,
@@ -14,11 +13,9 @@ const ModalComponent = ({
   setShowModal: React.Dispatch<React.SetStateAction<boolean>>;
   pokemonDetails: PokemonProp;
 }) => {
-  // Refs for inner and outer elements
   const inner = useRef(null);
   const outer = useRef(null);
 
-  // Function to handle clicks outside the modal
   const handleOuterClick = (
     e: React.MouseEvent<HTMLDivElement, MouseEvent>
   ) => {
@@ -26,40 +23,38 @@ const ModalComponent = ({
       setShowModal(false);
     }
   };
+
   return (
     <div
-      // Modal backdrop styling
-      className={`fixed inset-0 bg-[#0000007f] p-12 flex justify-center z-[2000] bg-opacity-50 duration-300 overflow-y-auto `}
+      className="fixed inset-0 bg-[#0000007f] p-4 sm:p-8 flex justify-center items-start z-[2000] overflow-y-auto"
       ref={outer}
       onClick={(e) => handleOuterClick(e)}
     >
       <div
-        // Modal content styling with dynamic color based on Pokemon type
-        className={`relative ${pokemonDetails.types[0].type.name} text-black sm:mx-auto p-4 mt-4 rounded-xl h-max`}
+        className={`relative ${pokemonDetails.types[0].type.name} text-black mx-auto p-4 mt-6 rounded-xl w-full max-w-3xl`}
         ref={inner}
       >
-        {/* Modal content */}
+        {/* Pokemon header */}
         <div className="flex flex-col gap-4 justify-center items-center">
-          <h1 className="text-4xl text-bold pt-4 uppercase">
+          <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold pt-2 uppercase text-center">
             {pokemonDetails.name}
           </h1>
+
           {/* Pokemon image */}
-          <div
-            className="m-4"
-            style={{ position: "relative", width: "300px", height: "300px" }}
-          >
+          <div className="m-4 w-[200px] h-[200px] sm:w-[250px] sm:h-[250px] md:w-[300px] md:h-[300px] relative">
             <Image
               src={`https://unpkg.com/pokeapi-sprites@2.0.2/sprites/pokemon/other/dream-world/${pokemonDetails.id}.svg`}
               alt="Pokemon"
-              width="250"
-              height="250"
+              fill
+              className="object-contain"
             />
           </div>
+
           {/* Pokemon Types */}
-          <div className="flex gap-2 my-4">
+          <div className="flex flex-wrap gap-2 my-2 sm:my-4 justify-center">
             {pokemonDetails?.types.map((singleType) => (
               <p
-                className="text-xs font-semibold inline-block py-1 px-2 uppercase rounded-full text-[#e4e6e6] bg-[#000000b9]  last:mr-0 mr-1"
+                className="text-xs sm:text-sm font-semibold inline-block py-1 px-3 uppercase rounded-full text-[#e4e6e6] bg-[#000000b9]"
                 key={singleType.slot}
               >
                 {singleType.type.name}
@@ -69,24 +64,21 @@ const ModalComponent = ({
         </div>
 
         {/* Pokemon stats */}
-        <div className="flex-col">
+        <div className="flex flex-col gap-3 mt-4 w-full">
           {pokemonDetails.stats.map((statObject: any) => {
             const statName = statObject.stat.name;
             const statValue = statObject.base_stat;
 
             return (
               <div
-                className="flex items-stretch"
-                style={{ width: "500px" }}
+                className="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-4 w-full"
                 key={statName}
               >
-                {/* Displaying stat name and value */}
-                <h3 className="p-3 w-1/2 flex gap-1 justify-between capitalize font-bold ">
-                  <strong className="">{statName}:</strong>
-                  <span className="font-2xl "> {statValue} </span>
+                <h3 className="flex justify-between w-full sm:w-1/2 capitalize font-bold text-sm sm:text-base">
+                  <span>{statName}:</span>
+                  <span>{statValue}</span>
                 </h3>
-                {/* Progress bar for the stat */}
-                <Progress className="w-1/2 m-auto " value={statValue} />
+                <Progress className="w-full sm:w-1/2 h-2" value={statValue} />
               </div>
             );
           })}
